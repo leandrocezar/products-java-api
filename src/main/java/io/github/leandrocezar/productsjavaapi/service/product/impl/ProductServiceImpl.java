@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,39 +20,64 @@ import io.github.leandrocezar.productsjavaapi.entity.product.ProductEntity;
 import io.github.leandrocezar.productsjavaapi.exception.RecordNotFoundException;
 import io.github.leandrocezar.productsjavaapi.repository.product.ProductRepository;
 import io.github.leandrocezar.productsjavaapi.service.product.ProductService;
-import io.github.leandrocezar.productsjavaapi.util.converter.ConverterToWrapper;
-import io.github.leandrocezar.productsjavaapi.wrapper.product.ProductWrapper;
+import io.github.leandrocezar.productsjavaapi.util.mapper.GenericMapper;
 
+/***
+ * Product service implementation. This class has all business rules applied to do any operation,
+ *
+ *
+ * @author Leandro Moreira Cezar
+ *
+ */
 @Service
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductRepository repository;
+    
+    @Autowired
+    GenericMapper modelMapper;
 
+    /**
+    * @see ProductService#save(ProductDTO)
+     */
     @Override
-    public ProductEntity save(ProductEntity product) throws RecordNotFoundException {
+    public ProductEntity save(ProductDTO dto) {
 
+	ProductEntity product= modelMapper.map(dto, ProductEntity.class);
 	return repository.save(product);
     }
 
+    /**
+     * @see ProductService#save(ProductDTO, String)
+      */
     @Override
     public ProductEntity save(ProductDTO product, String id) throws RecordNotFoundException {
 	Optional<ProductEntity> prodDb = findById(id);
-
+	ProductEntity prd  = null;
+	
 	if (!prodDb.isPresent()) {
 	    throw new RecordNotFoundException();
 	}
-	ProductEntity prd = prodDb.get();
-	product.mergeToEntity(prd);
+	prd = prodDb.get();
+	modelMapper.map(product, prd);
+	
+	// product.mergeToEntity(prd);
 
-	return save(prd);
+	return repository.save(prd);
     }
 
+    /**
+     * @see ProductService#findAll()
+      */
     @Override
     public Iterable<ProductEntity> findAll() {
 	return repository.findAll();
     }
 
+    /**
+     * @see ProductService#findById(String)
+      */
     @Override
     public Optional<ProductEntity> findById(String id) {
 
@@ -62,6 +85,9 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    /**
+     * @see ProductService#delet(String)
+      */
     @Override
     public void delete(String id) throws RecordNotFoundException {
 
@@ -73,6 +99,9 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    /**
+     * @see ProductService#findByCriteria(String, BigDecimal, BigDecimal)
+      */
     @Override
     public Iterable<ProductEntity> findByCriteria(String expression, BigDecimal minPrice, BigDecimal maxPrice) {
 
@@ -80,6 +109,16 @@ public class ProductServiceImpl implements ProductService {
 	return repository.findAll(spec);
     }
 
+    /***
+     * Return the specification to dinamyc query
+     * 
+     * @author Leandro Moreira Cezar
+     *
+     * @param expression product name or description
+     * @param minPrice product min price
+     * @param maxPrice product max price
+     * @return Specification<ProductEntity> dinamyc specification
+     */
     private static Specification<ProductEntity> getProductSpecification(String expression, BigDecimal minPrice,
 	    BigDecimal maxPrice) {
 

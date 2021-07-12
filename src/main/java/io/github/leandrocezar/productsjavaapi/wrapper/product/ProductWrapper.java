@@ -10,6 +10,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/***
+ * Represents a product response json
+ *
+ *
+ * @author Leandro Moreira Cezar
+ *
+ */
 @Getter
 @Setter
 @AllArgsConstructor

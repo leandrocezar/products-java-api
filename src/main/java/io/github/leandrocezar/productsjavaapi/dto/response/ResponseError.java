@@ -1,14 +1,21 @@
-package io.github.leandrocezar.productsjavaapi.exception;
+package io.github.leandrocezar.productsjavaapi.dto.response;
 
 import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Builder
-public final class ApiError {
+/***
+ * The response error structure
+ *
+ *
+ * @author Leandro Moreira Cezar
+ *
+ */
+@AllArgsConstructor
+public final class ResponseError {
 
     @JsonProperty("status_code")
     private HttpStatus statusCode;

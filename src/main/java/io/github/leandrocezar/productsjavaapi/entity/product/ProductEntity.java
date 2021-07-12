@@ -10,18 +10,26 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import io.github.leandrocezar.productsjavaapi.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/***
+ * Product entity on the database
+ *
+ *
+ * @author Leandro Moreira Cezar
+ *
+ */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "products")
-public class ProductEntity {
+public class ProductEntity extends BaseEntity {
     
     
     @Id
