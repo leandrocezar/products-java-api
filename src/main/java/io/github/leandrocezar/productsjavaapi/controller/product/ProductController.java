@@ -23,10 +23,12 @@ import io.github.leandrocezar.productsjavaapi.exception.RecordNotFoundException;
 import io.github.leandrocezar.productsjavaapi.service.product.ProductService;
 import io.github.leandrocezar.productsjavaapi.util.converter.ConverterToWrapper;
 import io.github.leandrocezar.productsjavaapi.wrapper.product.ProductWrapper;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.log4j.Log4j2;
 
 /***
  * Controller to manage products
@@ -35,8 +37,10 @@ import io.swagger.annotations.ApiResponses;
  * @author Leandro Moreira Cezar
  *
  */
+@Log4j2
 @RestController
 @RequestMapping("/products")
+@Api(value = "Test API Product Controller", tags = {"products"}, produces = "application/json") 
 public class ProductController {
 
     @Autowired

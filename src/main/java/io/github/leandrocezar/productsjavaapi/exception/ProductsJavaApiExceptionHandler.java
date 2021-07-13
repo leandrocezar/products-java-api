@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import io.github.leandrocezar.productsjavaapi.dto.response.ResponseError;
+import lombok.extern.log4j.Log4j2;
 
 
 /***
@@ -18,6 +19,7 @@ import io.github.leandrocezar.productsjavaapi.dto.response.ResponseError;
  *
  * @param <T>
  */
+@Log4j2
 @ControllerAdvice
 public class ProductsJavaApiExceptionHandler<T> {
 
@@ -33,6 +35,8 @@ public class ProductsJavaApiExceptionHandler<T> {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     protected ResponseEntity<ResponseError> handleRecordNotFoundException(RecordNotFoundException exception) {
 
+	log.error("Record not found in database", exception);
+	
 	ResponseError response = new ResponseError(HttpStatus.NOT_FOUND, "Record not found in the database");
 
 	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
@@ -50,6 +54,8 @@ public class ProductsJavaApiExceptionHandler<T> {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ResponseEntity<ResponseError> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
 
+	log.error("Invalid json request");
+	
 	ResponseError response = new ResponseError(HttpStatus.BAD_REQUEST, "Invalid request! Check required fields.");
 
 	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
@@ -67,6 +73,7 @@ public class ProductsJavaApiExceptionHandler<T> {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ResponseEntity<ResponseError> handleException(Exception exception) {
 
+	log.error("Internal Server Error");
 	ResponseError response = new ResponseError(HttpStatus.INTERNAL_SERVER_ERROR, "Ooops! An internal server error ocurred.");
 
 	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);

@@ -11,6 +11,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import io.github.leandrocezar.productsjavaapi.exception.RecordNotFoundException;
 import io.github.leandrocezar.productsjavaapi.repository.product.ProductRepository;
 import io.github.leandrocezar.productsjavaapi.service.product.ProductService;
 import io.github.leandrocezar.productsjavaapi.util.mapper.GenericMapper;
+import lombok.extern.log4j.Log4j2;
 
 /***
  * Product service implementation. This class has all business rules applied to do any operation,
@@ -29,6 +31,7 @@ import io.github.leandrocezar.productsjavaapi.util.mapper.GenericMapper;
  * @author Leandro Moreira Cezar
  *
  */
+@Log4j2
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -44,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductEntity save(ProductDTO dto) {
 
+	log.info(String.format("[ADD PRODUCT]: %s", dto.toString()));
 	ProductEntity product= modelMapper.map(dto, ProductEntity.class);
 	return repository.save(product);
     }
@@ -53,6 +57,9 @@ public class ProductServiceImpl implements ProductService {
       */
     @Override
     public ProductEntity save(ProductDTO product, String id) throws RecordNotFoundException {
+	
+	log.info(String.format("[UPDATE PRODUCT]: %s - %s", id, product.toString()));
+	
 	Optional<ProductEntity> prodDb = findById(id);
 	ProductEntity prd  = null;
 	
@@ -72,6 +79,8 @@ public class ProductServiceImpl implements ProductService {
       */
     @Override
     public Iterable<ProductEntity> findAll() {
+	log.info("[ALL PRODUCTS]");
+	
 	return repository.findAll();
     }
 
@@ -80,7 +89,8 @@ public class ProductServiceImpl implements ProductService {
       */
     @Override
     public Optional<ProductEntity> findById(String id) {
-
+	log.info(String.format("[FIND PRODUCT BY ID]: %s", id));
+	
 	return repository.findById(id);
 
     }
@@ -91,6 +101,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void delete(String id) throws RecordNotFoundException {
 
+	log.info(String.format("[DELETE PRODUCT BY ID]: %s", id));
+	
 	if (!findById(id).isPresent()) {
 	    throw new RecordNotFoundException();
 	}
@@ -104,7 +116,8 @@ public class ProductServiceImpl implements ProductService {
       */
     @Override
     public Iterable<ProductEntity> findByCriteria(String expression, BigDecimal minPrice, BigDecimal maxPrice) {
-
+	log.info(String.format("[FIND PRODUCT BY CRITERIA]: %s - %s - %s", expression, minPrice, maxPrice));
+	
 	Specification<ProductEntity> spec = getProductSpecification(expression, minPrice, maxPrice);
 	return repository.findAll(spec);
     }
