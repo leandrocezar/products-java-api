@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.v3.oas.models.media.MediaType;
+import lombok.extern.log4j.Log4j2;
 
 /***
  * Controller to manage products
@@ -37,6 +37,7 @@ import io.swagger.v3.oas.models.media.MediaType;
  * @author Leandro Moreira Cezar
  *
  */
+@Log4j2
 @RestController
 @RequestMapping("/products")
 @Api(value = "Test API Product Controller", tags = {"products"}, produces = "application/json") 

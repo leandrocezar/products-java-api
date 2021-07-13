@@ -18,11 +18,11 @@ The API main URL `/products`.
 This API provides HTTP endpoint's and tools for the following:
 
 * Create a product: `POST/products`
-* Update a product: `PUT/products/1`
-* Delete a product (by id): `DELETE/products/1`
-* Find a unique product by id: `GET/products/1`
+* Update a product: `PUT/products/{id}`
+* Delete a product (by id): `DELETE/products/{id}`
+* Find a unique product by id: `GET/products/{id}`
 * Get all products: `GET/products`
-* Get product by name or description, min price and max price products: `GET/products/search?q=productname&min_price=0&maxprice=10`
+* Get product by name or description, min price and max price products: `GET/products/search?q={expression}&min_price={minprice}&max_price={maxprice}`
 
 To test the application import `src/main/resources/insomnia_collection.json`  file on Insomnia App
 
@@ -66,7 +66,7 @@ This end-point is called to add a new Product.
 * 400 - Bad Request: the request was unacceptable. Reason: missing a required parameter.
 * 500- Server Error: something went wrong on API.
 
-`PUT/products/:id`
+`PUT/products/{id}`
 
 This end-point is called to update a existing Product.
 
@@ -110,7 +110,7 @@ This end-point is called to update a existing Product.
 * 404 - Not Found: The product with path param id not exists.
 * 500- Server Error: something went wrong on API.
 
-`DELETE/products/:id`
+`DELETE/products/{id}`
 
 This end-point is called to delete a existing Product.
 
@@ -125,7 +125,7 @@ This end-point is called to delete a existing Product.
 * 404 - Not Found: The product with path param id not exists.
 * 500- Server Error: something went wrong on API.
 
-`GET/products/:id`
+`GET/products/{id}`
 
 This end-point is called to find a unique product Product.
 
@@ -177,7 +177,7 @@ This end-point is called to find all Products.
 * 200 - OK: Everything worked as expected.
 * 500- Server Error: something went wrong on API.
 
-`GET/products/search?q=:expression&min_price=:min_price&max_price=:max_price`
+`GET/products/search?q={expression}&min_price={min_price}&max_price={max_price}`
 
 This end-point is called to find products by some cryteria.
 
@@ -217,13 +217,14 @@ This end-point is called to find products by some cryteria.
 
 This project was developed with:
 
-* **Java 8**
-* **Spring Boot 2.5.2**
-* **Maven**
-* **JUnit 5**
-* **H2**
-* **Swagger 3.0.0**
-* **Model Mapper 2.3.9**
+* Java 8
+* Spring Boot 2.5.2
+* Maven
+* Log4j2
+* JUnit 5
+* H2
+* Swagger 3.0.0
+* Model Mapper 2.3.9
 
 ### Compile and Package
 
@@ -237,7 +238,8 @@ This command will clean, compile and generate a `jar` at target directory, e.g. 
 
 ### Execution
 
-This project uses **H2 database**. This database run in memory and create database, tables and populate it on turn on the application. This database run in the memory of the machine.
+This project uses **H2 database**. This database run in memory!. 
+On run the project automatically will create a database, table and populate with 5 products!.
 
 ### Test
 
@@ -261,7 +263,7 @@ or
 mvn spring-boot:run -Dspring.profiles.active=dev
 ```
 
-By default, the API will be available at [http://localhost:999](http://localhost:9999)
+By default, the API will be available at [http://localhost:9999](http://localhost:9999)
 
 ### Documentation
 
