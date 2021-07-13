@@ -70,7 +70,7 @@ This end-point is called to add a new Product.
 
 This end-point is called to update a existing Product.
 
-**Path param: **
+**Path param:**
 
 `id` - product id to update (required)
 
@@ -114,7 +114,7 @@ This end-point is called to update a existing Product.
 
 This end-point is called to delete a existing Product.
 
-**Path param: **
+**Path param:**
 
 `id` - product id to delete (required)
 
@@ -129,7 +129,7 @@ This end-point is called to delete a existing Product.
 
 This end-point is called to find a unique product Product.
 
-**Path param: **
+**Path param:**
 
 `id` - product id to find (required)
 
@@ -181,7 +181,7 @@ This end-point is called to find all Products.
 
 This end-point is called to find products by some cryteria.
 
-**Query params: **
+**Query params:**
 
 `q` - product name or description
 
@@ -233,7 +233,7 @@ The API also was developed to run with an `jar`. In order to generate this `jar`
 mvn package
 ```
 
-This command will clean, compile and generate a `jar` at target directory, e.g. `prodcts-java-api-1.0.0-SNAPSHOT.jar`
+This command will clean, compile and generate a `jar` at target directory, e.g. `products-java-api-1.0.0-SNAPSHOT.jar`
 
 ### Execution
 
@@ -266,16 +266,3 @@ By default, the API will be available at [http://localhost:999](http://localhost
 ### Documentation
 
 * Swagger (development environment): [http://localhost:9999/swagger-ui/index.html](http://localhost:9999/swagger-ui/index.html)
-
-#### Medium Articles
-
-* [Construindo uma API RESTful com Java e Spring Framework— Parte 1 (PT-BR)](https://medium.com/@mari_azevedo/construindo-uma-api-restful-com-java-e-spring-framework-46b74371d107)
-* [Construindo uma API RESTful com Java e Spring Framework— Parte 2 (PT-BR)](https://medium.com/@mari_azevedo/construindo-uma-api-restful-com-java-e-spring-framework-parte-2-7a6c3e2ad453)
-* [Construindo uma API RESTful com Java e Spring Framework— Parte 3 (PT-BR)](https://medium.com/@mari_azevedo/construindo-uma-api-restful-com-java-e-spring-framework-parte-3-ab34fcc00dee)
-* [Construindo uma API RESTful com Java e Spring Framework— Parte 4 (PT-BR)](https://medium.com/@mari_azevedo/construindo-uma-api-restful-com-java-e-spring-framework-parte-4-6287f68ffc3c)
-* [Building a RESTful API with Java and Spring Framework — Part 1 (EN)](https://mari-azevedo.medium.com/building-a-restful-api-with-java-and-spring-framework-part-1-6c364a885831)
-
-### License
-
-This API is licensed under the MIT License.
-
