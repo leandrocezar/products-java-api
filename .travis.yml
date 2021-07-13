@@ -1,6 +1,4 @@
 language: java
 sudo: false
 jdk:
-- oraclejdk9
-before_install:
-- export TZ=Brazil/East
+- oraclejdk11
