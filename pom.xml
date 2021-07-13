@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>io.github.leandrocezar</groupId>
 	<artifactId>products-java-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>products-java-api</name>
 	<description>PRODUCT-API</description>
 	<properties>
@@ -96,8 +96,15 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
-					<excludes>
+				  <excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
