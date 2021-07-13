@@ -7,6 +7,7 @@ import javax.validation.constraints.Positive;
 
 import io.github.leandrocezar.productsjavaapi.dto.BaseDTO;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,6 +20,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
+@AllArgsConstructor
 public class ProductDTO extends BaseDTO{
     
     private static final long serialVersionUID = -3636540370641171305L;

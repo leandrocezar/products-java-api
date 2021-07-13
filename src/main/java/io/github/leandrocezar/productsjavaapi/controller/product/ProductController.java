@@ -63,7 +63,7 @@ public class ProductController {
     @ApiOperation(value = "Get list of Products", response = Iterable.class, produces="application/json", tags = "products")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Return the list of products"),
 	    @ApiResponse(code = 500, message = "An exception ocurred"), })
-    public ResponseEntity<Iterable<ProductWrapper>> allProducts() {
+    public ResponseEntity<Iterable<ProductWrapper>> findAll() {
 
 	Iterable<ProductEntity> response = service.findAll();
 

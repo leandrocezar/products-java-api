@@ -86,7 +86,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * @see ProductService#delet(String)
+     * @see ProductService#delete(String)
       */
     @Override
     public void delete(String id) throws RecordNotFoundException {
@@ -119,7 +119,7 @@ public class ProductServiceImpl implements ProductService {
      * @param maxPrice product max price
      * @return Specification<ProductEntity> dinamyc specification
      */
-    private static Specification<ProductEntity> getProductSpecification(String expression, BigDecimal minPrice,
+    private Specification<ProductEntity> getProductSpecification(String expression, BigDecimal minPrice,
 	    BigDecimal maxPrice) {
 
 	return (Root<ProductEntity> root, CriteriaQuery<?> query, CriteriaBuilder builder) -> {

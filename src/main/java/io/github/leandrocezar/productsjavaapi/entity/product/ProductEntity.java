@@ -46,8 +46,4 @@ public class ProductEntity extends BaseEntity {
     @Column(nullable = false)
     private BigDecimal price;
     
-    public ProductEntity(String id) { 
-	this.id = id;
-    }
-
 }
